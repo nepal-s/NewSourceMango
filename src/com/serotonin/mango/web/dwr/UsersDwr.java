@@ -96,6 +96,31 @@ public class UsersDwr extends BaseDwr {
         }
         return new UserDao().getUser(id);
     }
+//validate password
+
+  private boolean isValidPassword(String Password)
+ {
+    if (password == ""|| password.length()<8||password.length()>20)
+      {return false;}
+    boolean hasUpper = false , hasLower=false, hasDigit=false, hasSpecial = false;
+
+    for (char c :password.toCharArray()){
+        if (Character.isUpperCase(c)) hasUpper=true;
+        else if (Character.isLowerCase(c)) hasLower=true;
+        else if (Character.isDigit(c)) hasDigit=true;
+        else  hasSpecial=true;
+
+    } 
+   return hasUpper && hasLower && hasDigit && hasSpecial;
+ }
+
+
+
+
+
+
+
+
 
     public DwrResponseI18n saveUserAdmin(int id, String username, String password, String email, String phone,
             boolean admin, boolean disabled, int receiveAlarmEmails, boolean receiveOwnAuditEvents,
@@ -114,7 +139,7 @@ public class UsersDwr extends BaseDwr {
             user = userDao.getUser(id);
         user.setUsername(username);
         if (!StringUtils.isEmpty(password))
-            user.setPassword(Common.encrypt(password));
+          user.setPassword(Common.encrypt(password));
         user.setEmail(email);
         user.setPhone(phone);
         user.setAdmin(admin);
@@ -133,6 +158,7 @@ public class UsersDwr extends BaseDwr {
             response.addMessage(new LocalizableMessage("users.validate.usernameUnique"));
         else if (dupUser != null && id != dupUser.getId())
             response.addMessage(new LocalizableMessage("users.validate.usernameInUse"));
+        
 
         // Cannot make yourself disabled or not admin
         if (currentUser.getId() == id) {
@@ -154,6 +180,8 @@ public class UsersDwr extends BaseDwr {
 
         return response;
     }
+
+
 
     public DwrResponseI18n saveUser(int id, String password, String email, String phone, int receiveAlarmEmails,
             boolean receiveOwnAuditEvents) {
