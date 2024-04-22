@@ -2,7 +2,7 @@
     Mango - Open Source M2M - http://mango.serotoninsoftware.com
     Copyright (C) 2006-2011 Serotonin Software Technologies Inc.
     @author Matthew Lohbihler
-    
+
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -29,20 +29,20 @@
     <c:when test="${!empty instanceDescription}">${instanceDescription}</c:when>
     <c:otherwise><fmt:message key="header.title"/></c:otherwise>
   </c:choose></title>
-  
+
   <!-- Meta -->
   <meta http-equiv="content-type" content="application/xhtml+xml;charset=utf-8"/>
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="Copyright" content="&copy;2006-2011 Serotonin Software Technologies Inc."/>
   <meta name="DESCRIPTION" content="Mango Serotonin Software"/>
   <meta name="KEYWORDS" content="Mango Serotonin Software"/>
-  
+
   <!-- Style -->
   <link rel="icon" href="images/favicon.ico"/>
   <link rel="shortcut icon" href="images/favicon.ico"/>
   <link href="resources/common.css" type="text/css" rel="stylesheet"/>
   <jsp:invoke fragment="styles"/>
-  
+
   <!-- Scripts -->
   <script type="text/javascript">var djConfig = { isDebug: false, extraLocale: ['en-us', 'nl', 'nl-nl', 'ja-jp', 'fi-fi', 'sv-se', 'zh-cn', 'zh-tw','xx'] };</script>
   <!-- script type="text/javascript" src="http://o.aolcdn.com/dojo/0.4.2/dojo.js"></script -->
@@ -67,15 +67,15 @@
         dojo.addOnLoad(mango.header.onLoad);
         dojo.addOnLoad(function() { setUserMuted(${sessionUser.muted}); });
       </c:if>
-      
+
       function setLocale(locale) {
           MiscDwr.setLocale(locale, function() { window.location = window.location });
       }
-      
+
       function setHomeUrl() {
           MiscDwr.setHomeUrl(window.location.href, function() { alert("Home URL saved"); });
       }
-      
+
       function goHomeUrl() {
           MiscDwr.getHomeUrl(function(loc) { window.location = loc; });
       }
@@ -108,11 +108,12 @@
     <tr>
       <td style="cursor:default" >
         <c:if test="${!empty sessionUser}">
+          <tag:menuItem href="landing.shtm" png="house" key="header.landing"/>
           <tag:menuItem href="watch_list.shtm" png="eye" key="header.watchlist"/>
           <tag:menuItem href="views.shtm" png="icon_view" key="header.views"/>
           <tag:menuItem href="events.shtm" png="flag_white" key="header.alarms"/>
           <tag:menuItem href="reports.shtm" png="report" key="header.reports"/>
-                
+
           <c:if test="${sessionUser.dataSourcePermission}">
             <img src="images/menu_separator.png"/>
             <tag:menuItem href="event_handlers.shtm" png="cog" key="header.eventHandlers"/>
@@ -121,10 +122,10 @@
             <tag:menuItem href="compound_events.shtm" png="multi_bell" key="header.compoundEvents"/>
             <tag:menuItem href="point_links.shtm" png="link" key="header.pointLinks"/>
           </c:if>
-          
+
           <img src="images/menu_separator.png"/>
           <tag:menuItem href="users.shtm" png="user" key="header.users"/>
-          
+
           <c:if test="${sessionUser.admin}">
             <tag:menuItem href="point_hierarchy.shtm" png="folder_brick" key="header.pointHierarchy"/>
             <tag:menuItem href="mailing_lists.shtm" png="book" key="header.mailingLists"/>
@@ -134,7 +135,7 @@
             <tag:menuItem href="emport.shtm" png="script_code" key="header.emport"/>
             <tag:menuItem href="sql.shtm" png="script" key="header.sql"/>
           </c:if>
-          
+
           <img src="images/menu_separator.png"/>
           <tag:menuItem href="logout.htm" png="control_stop_blue" key="header.logout"/>
           <tag:menuItem href="help.shtm" png="help" key="header.help"/>
@@ -144,7 +145,7 @@
         </c:if>
         <div id="headerMenuDescription" class="labelDiv" style="position:absolute;display:none;"></div>
       </td>
-      
+
       <td align="right">
         <c:if test="${!empty sessionUser}">
           <span class="copyTitle"><fmt:message key="header.user"/>: <b>${sessionUser.username}</b></span>
